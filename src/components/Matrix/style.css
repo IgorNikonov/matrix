@@ -1,0 +1,11 @@
+.matrix-container {
+  /* margin-top: 50vh;
+  transform: translateY(-50%); */
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.row {
+  display: flex;
+}

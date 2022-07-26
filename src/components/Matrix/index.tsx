@@ -1,0 +1,27 @@
+import "./style.css";
+import MatrixElement from "../../components/MatrixElement";
+import { nanoid } from "nanoid";
+
+interface IMatrixProps {
+  matrix: number[][];
+}
+
+const Matrix: React.FC<IMatrixProps> = ({ matrix }) => {
+  // const uuid = uuid();
+
+  return (
+    <div className="wrapper">
+      <div className="matrix-container">
+        {matrix.map((el) => (
+          <div className="row" key={nanoid()}>
+            {el.map((matrixEl) => (
+              <MatrixElement content={matrixEl} key={nanoid()} />
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default Matrix;
