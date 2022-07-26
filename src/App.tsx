@@ -10,7 +10,8 @@ import {
   triangularizeMatrix,
   horizontallyReverseMatrix,
   verticallyReverseMatrix,
-  transposeMatrix
+  transposeMatrixClockwise,
+  transposeMatrixCounterClockwise
 } from "./utils/matrixUtils";
 
 import ClosestNumber from "./components/ClosestNumber";
@@ -48,8 +49,11 @@ export default function App() {
   const verticallyReverse = () => {
     dispatch(changeMatrixState(verticallyReverseMatrix(matrix)));
   }
-  const transpose = () => {
-    dispatch(changeMatrixState(transposeMatrix(matrix)));
+  const transposeClockwise = () => {
+    dispatch(changeMatrixState(transposeMatrixClockwise(matrix)));
+  }
+  const transposeCounterClockwise = () => {
+    dispatch(changeMatrixState(transposeMatrixCounterClockwise(matrix)));
   }
 
   return (
@@ -82,8 +86,11 @@ export default function App() {
         <button className="btn" onClick={verticallyReverse}>
           reverse vertically
         </button>
-        <button className="btn" onClick={transpose}>
-          transpose
+        <button className="btn" onClick={transposeClockwise}>
+          transpose clockwise
+        </button>
+        <button className="btn" onClick={transposeCounterClockwise}>
+          transpose counterclockwise
         </button>
       </div>
       {created && <ClosestNumber matrix={matrix} />}

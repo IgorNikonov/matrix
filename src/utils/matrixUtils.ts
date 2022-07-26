@@ -63,7 +63,11 @@ export const verticallyReverseMatrix = (matrix: number[][]) => {
   return matrix.map((row, idx) => matrix[matrix.length - idx - 1]);
 }
 
-export const transposeMatrix = (matrix: number[][]) => {
+export const transposeMatrixClockwise = (matrix: number[][]) => {
   const refactoredMatrix = refactorMatrix(matrix);
   return horizontallyReverseMatrix(refactoredMatrix);
+} 
+export const transposeMatrixCounterClockwise = (matrix: number[][]) => {
+  const refactoredMatrix = refactorMatrix(matrix);
+  return verticallyReverseMatrix(refactoredMatrix);
 } 
