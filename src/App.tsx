@@ -6,9 +6,11 @@ import { changeMatrixState, makeTriangular } from "./features/matrixActions/matr
 
 import {
   createMatrix,
-  transposeMatrix,
+  refactorMatrix,
   triangularizeMatrix,
-  reverseMatrix
+  horizontallyReverseMatrix,
+  verticallyReverseMatrix,
+  transposeMatrix
 } from "./utils/matrixUtils";
 
 import ClosestNumber from "./components/ClosestNumber";
@@ -21,14 +23,16 @@ export default function App() {
   const [rows, setRows] = useState(0);
   const [columns, setColumns] = useState(0);
   const [triangular, setTriangular] = useState(false);
+  const [created, setCreated] = useState(false);
 
 
   // click handlers
-  const transpose = () => {
-    dispatch(changeMatrixState(transposeMatrix(matrix)));
+  const refactor = () => {
+    dispatch(changeMatrixState(refactorMatrix(matrix)));
   };
   const create = () => {
     dispatch(changeMatrixState(createMatrix(rows, columns)));
+    setCreated(true);
   }
   const triangularize = () => {
     if (rows !== columns) {
@@ -38,8 +42,14 @@ export default function App() {
       setTriangular(!triangular);
     }
   };
-  const reverse = () => {
-    dispatch(changeMatrixState(reverseMatrix(matrix)));
+  const horizontallyReverse = () => {
+    dispatch(changeMatrixState(horizontallyReverseMatrix(matrix)));
+  }
+  const verticallyReverse = () => {
+    dispatch(changeMatrixState(verticallyReverseMatrix(matrix)));
+  }
+  const transpose = () => {
+    dispatch(changeMatrixState(transposeMatrix(matrix)));
   }
 
   return (
@@ -60,17 +70,23 @@ export default function App() {
       {triangular && <Matrix matrix={triangularMatrix} />}
 
       <div className="btn-container">
-        <button className="btn" onClick={transpose}>
-          transpose
+        <button className="btn" onClick={refactor}>
+          refactor
         </button>
         <button className="btn" onClick={triangularize}>
           triangularize
         </button>
-        <button className="btn" onClick={reverse}>
-          reverse
+        <button className="btn" onClick={horizontallyReverse}>
+          reverse horizontally
+        </button>
+        <button className="btn" onClick={verticallyReverse}>
+          reverse vertically
+        </button>
+        <button className="btn" onClick={transpose}>
+          transpose
         </button>
       </div>
-      <ClosestNumber matrix={matrix} />
+      {created && <ClosestNumber matrix={matrix} />}
     </div>
   );
 }

@@ -10,14 +10,11 @@ export const createMatrix = (nRows: number, nElements: number) => {
   return matrix;
 };
 
-export const transposeMatrix = (matrix: number[][]) => {
+export const refactorMatrix = (matrix: number[][]) => {
   return matrix[0].map((el, idx) => matrix.map((el: any) => el[idx]));
 };
 
 export const triangularizeMatrix = (matrix: number[][]) => {
-  // const result = [...matrix];
-  // result.map((row, idx) => row.fill(0, idx, row.length));
-  // return result;
   return matrix.map((row, idx) => {
     return row.map((el, index) => {
       if (index + 1 > row.length - idx) {
@@ -56,8 +53,17 @@ export const findClosestNumber = (matrix: number[][], n: number) => {
   return result;
 };
 
-export const reverseMatrix = (matrix: number[][]) => {
+export const horizontallyReverseMatrix = (matrix: number[][]) => {
   return matrix.map((row) => {
     return row.map((el, idx) => row[row.length - idx - 1])
   })
 }
+
+export const verticallyReverseMatrix = (matrix: number[][]) => {
+  return matrix.map((row, idx) => matrix[matrix.length - idx - 1]);
+}
+
+export const transposeMatrix = (matrix: number[][]) => {
+  const refactoredMatrix = refactorMatrix(matrix);
+  return horizontallyReverseMatrix(refactoredMatrix);
+} 

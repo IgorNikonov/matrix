@@ -7,7 +7,7 @@ interface IClosestNumberProps {
 	matrix: number[][];
 }
 
-const ClosestNumber: IClosestNumberProps = ({matrix}) => {
+const ClosestNumber: React.FC<IClosestNumberProps> = ({matrix}) => {
 	const [userInput, setUserInput] = useState(0);
 	const [clicked, setClicked] = useState(false);
 
