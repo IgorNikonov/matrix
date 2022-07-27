@@ -1,13 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+interface IClosestNumberData {
+	initialNumber: number;
+	row: number;
+	column: number;
+	closestNumber: number;
+	deviation: number;
+}
+
 interface IClosestNumberState {
-	data: {
-		initialNumber: number;
-		row: number;
-		column: number;
-		closestNumber: number;
-		deviation: number;
-	}
+	data: IClosestNumberData
 }
 
 const initialState: IClosestNumberState = {

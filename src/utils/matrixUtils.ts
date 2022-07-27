@@ -1,4 +1,4 @@
-export const createMatrix = (nRows: number, nElements: number) => {
+export const createMatrix = (nRows?: number, nElements?: number) => {
   const matrix = Array.from(Array(nRows), () => {
     const rows = Array.from(Array(nElements), () =>
       Math.floor(Math.random() * 100)
@@ -17,10 +17,10 @@ export const refactorMatrix = (matrix: number[][]) => {
 export const triangularizeMatrix = (matrix: number[][]) => {
   return matrix.map((row, idx) => {
     return row.map((el, index) => {
-      if (index + 1 > row.length - idx) {
-        return 0;
-      } else {
+      if (index < row.length - (row.length - idx - 1)) {
         return el;
+      } else {
+        return 0;
       }
     })
   })
@@ -36,14 +36,14 @@ export const findClosestNumber = (matrix: number[][], n: number) => {
   };
 
   matrix.map((row, rowIdx) => {
-    return row.reduce((prev, next, colIdx) => {
-      if (Math.abs(n - next) < Math.abs(n - prev)) {
+    return row.reduce((acc, item, colIdx) => {
+      if (Math.abs(n - item) < Math.abs(n - acc)) {
         result.row = rowIdx + 1;
         result.column = colIdx + 1;
-        result.closestNumber = next;
-        return next;
+        result.closestNumber = item;
+        return item;
       }
-      return prev;
+      return acc;
       
     }, result.closestNumber);
   });
