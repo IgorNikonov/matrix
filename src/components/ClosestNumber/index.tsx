@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { setClosestNumber } from '../../features/closestNumber/closestNumberSlice';
 import { findClosestNumber } from '../../utils/matrixUtils'
@@ -11,7 +11,7 @@ const ClosestNumber: React.FC<IClosestNumberProps> = ({matrix}) => {
 	const [userInput, setUserInput] = useState(0);
 	const [clicked, setClicked] = useState(false);
 
-	const {initialNumber, row, column, closestNumber, deviation} = useAppSelector(state => state.closestNumber.data);
+	const {initialNumber, row, column, closestNumber, deviation} = useAppSelector(state => state.closestNumber);
 	const dispatch = useAppDispatch();
 
 	const clickHandler = () => {

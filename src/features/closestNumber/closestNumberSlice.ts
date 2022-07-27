@@ -9,17 +9,19 @@ interface IClosestNumberData {
 }
 
 interface IClosestNumberState {
-	data: IClosestNumberData
+	initialNumber: number;
+	row: number;
+	column: number;
+	closestNumber: number;
+	deviation: number;
 }
 
 const initialState: IClosestNumberState = {
-	data:{
-		initialNumber: 0,
-		row: 0,
-		column: 0,
-		closestNumber: 9999,
-		deviation: 0,
-	}
+	initialNumber: 0,
+	row: 0,
+	column: 0,
+	closestNumber: 9999,
+	deviation: 0,
 }
 
 const closestNumberSlice = createSlice({
@@ -27,12 +29,12 @@ const closestNumberSlice = createSlice({
 	initialState,
 	reducers: {
 		setClosestNumber(state, action) {
-			state.data.closestNumber = action.payload.closestNumber;
-			state.data.initialNumber = action.payload.initialNumber;
-			state.data.row = action.payload.row;
-			state.data.column = action.payload.column;
-			state.data.closestNumber = action.payload.closestNumber;
-			state.data.deviation = action.payload.deviation;
+			state.closestNumber = action.payload.closestNumber;
+			state.initialNumber = action.payload.initialNumber;
+			state.row = action.payload.row;
+			state.column = action.payload.column;
+			state.closestNumber = action.payload.closestNumber;
+			state.deviation = action.payload.deviation;
 		}
 	},
 });

@@ -1,8 +1,7 @@
-import { useState } from "react";
 import "./App.css";
 import Matrix from "./components/Matrix";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
-import { changeMatrixState, setInitialRows, setInitialColumns } from "./features/matrixActions/matrixStateSlice";
+import { createInitialMatrix, changeMatrixState, setInitialRows, setInitialColumns } from "./features/matrixActions/matrixStateSlice";
 
 import { createMatrix } from "./utils/matrixUtils";
 
@@ -20,10 +19,8 @@ export default function App() {
 
   // create initial matrix
   const create = () => {
-    dispatch(changeMatrixState(createMatrix(rows, columns)));
+    dispatch(createInitialMatrix(createMatrix(rows, columns)));
   }
-
-  console.log(isTriangular)
 
   return (
     <div className="App">
@@ -41,7 +38,6 @@ export default function App() {
 
       {!isTriangular && <Matrix matrix={matrix} />}
       {isTriangular && <Matrix matrix={triangularMatrix} />}
-
 
       {matrix.length && 
         <>

@@ -5,6 +5,7 @@ interface IMatrixState {
   triangularMatrix: number[][];
   initial: {rows?: number, columns?: number};
   isTriangular: boolean;
+  firstTriangular: boolean;
 }
 
 const initialState: IMatrixState = {
@@ -14,15 +15,22 @@ const initialState: IMatrixState = {
     rows: 0,
     columns: 0
   },
-  isTriangular: false
+  isTriangular: false,
+  firstTriangular: false
 };
 
 const matrixStateSlice = createSlice({
   name: "matrixState",
   initialState,
   reducers: {
+    createInitialMatrix(state, action: PayloadAction<number[][]>){
+      state.matrixState = action.payload
+    },
     changeMatrixState(state, action: PayloadAction<number[][]>) {
       state.matrixState = action.payload;
+    },
+    changeTriangularMatrixState(state, action: PayloadAction<number[][]>) {
+      state.triangularMatrix = action.payload;
     },
     makeTriangular(state, action: PayloadAction<number[][]>) {
       state.triangularMatrix = action.payload;
@@ -35,9 +43,12 @@ const matrixStateSlice = createSlice({
     },
     toggleTriangular(state) {
       state.isTriangular = !state.isTriangular
+    },
+    makeFirstTriangular(state) {
+      state.firstTriangular = true;
     }
   }
 });
 
-export const { changeMatrixState, makeTriangular, setInitialRows, setInitialColumns, toggleTriangular } = matrixStateSlice.actions;
+export const { createInitialMatrix, changeMatrixState, makeTriangular, setInitialRows, setInitialColumns, toggleTriangular, makeFirstTriangular, changeTriangularMatrixState } = matrixStateSlice.actions;
 export default matrixStateSlice.reducer;
