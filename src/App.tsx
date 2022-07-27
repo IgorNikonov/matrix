@@ -23,8 +23,6 @@ export default function App() {
     dispatch(changeMatrixState(createMatrix(rows, columns)));
   }
 
-  console.log(isTriangular)
-
   return (
     <div className="App">
       <div className="create-matrix">

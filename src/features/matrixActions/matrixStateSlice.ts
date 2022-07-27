@@ -21,19 +21,19 @@ const matrixStateSlice = createSlice({
   name: "matrixState",
   initialState,
   reducers: {
-    changeMatrixState(state, action: PayloadAction<number[][]>) {
+    changeMatrixState(state: IMatrixState, action: PayloadAction<number[][]>) {
       state.matrixState = action.payload;
     },
-    makeTriangular(state, action: PayloadAction<number[][]>) {
+    makeTriangular(state: IMatrixState, action: PayloadAction<number[][]>) {
       state.triangularMatrix = action.payload;
     },
-    setInitialRows(state, action: PayloadAction<number>) {
+    setInitialRows(state: IMatrixState, action: PayloadAction<number>) {
       state.initial.rows = action.payload
     },
-    setInitialColumns(state, action: PayloadAction<number>) {
+    setInitialColumns(state: IMatrixState, action: PayloadAction<number>) {
       state.initial.columns = action.payload
     },
-    toggleTriangular(state) {
+    toggleTriangular(state: IMatrixState) {
       state.isTriangular = !state.isTriangular
     }
   }
