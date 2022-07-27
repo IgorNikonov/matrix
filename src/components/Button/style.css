@@ -1,3 +1,33 @@
 button {
 	padding: 15px;
+	border: none;
+	margin: 5px;
+}
+
+.light-blue {
+	background-color: #3daad6;
+}
+
+.green {
+	background-color: #6baa41;
+}
+
+.warm-yellow {
+	background-color: #dea336;
+}
+
+.pale-red {
+	background-color: #d94e47;
+}
+
+.dark-grey {
+	background-color: #969fb9;
+}
+
+.light-grey {
+	background-color: #ccd8d5;
+}
+
+.dark-green {
+	background-color: #05a95c;
 }

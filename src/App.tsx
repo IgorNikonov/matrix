@@ -18,12 +18,9 @@ export default function App() {
 
   const dispatch = useAppDispatch();
 
-  const [created, setCreated] = useState(false);
-
-  // action to create initial matrix
+  // create initial matrix
   const create = () => {
     dispatch(changeMatrixState(createMatrix(rows, columns)));
-    setCreated(true);
   }
 
   console.log(isTriangular)
@@ -45,9 +42,13 @@ export default function App() {
       {!isTriangular && <Matrix matrix={matrix} />}
       {isTriangular && <Matrix matrix={triangularMatrix} />}
 
-      <MatrixActions />
 
-      {created && <ClosestNumber matrix={matrix} />}
+      {matrix.length && 
+        <>
+          <MatrixActions />
+          <ClosestNumber matrix={matrix} />
+        </>
+      }
     </div>
   );
 }

@@ -2,14 +2,7 @@ import React from 'react';
 import Button from '../Button';
 import './style.css';
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import {
-  refactorMatrix,
-  triangularizeMatrix,
-  horizontallyReverseMatrix,
-  verticallyReverseMatrix,
-  transposeMatrixClockwise,
-  transposeMatrixCounterClockwise
-} from "../../utils/matrixUtils";
+import * as actions from "../../utils/matrixUtils";
 import { changeMatrixState, makeTriangular, toggleTriangular } from "../../features/matrixActions/matrixStateSlice";
 
 const MatrixActions = () => {
@@ -18,39 +11,46 @@ const MatrixActions = () => {
 	const dispatch = useAppDispatch();
 
 	const refactor = () => {
-    dispatch(changeMatrixState(refactorMatrix(matrix)));
+    dispatch(changeMatrixState(actions.refactorMatrix(matrix)));
   };
   const triangularize = () => {
     if (rows !== columns) {
-      prompt('number of rows and columns have to match');
+      alert('number of rows and columns have to match');
     } else {
-      dispatch(makeTriangular(triangularizeMatrix(matrix)));
+      dispatch(makeTriangular(actions.triangularizeMatrix(matrix)));
       dispatch(toggleTriangular);
     }
   };
   const horizontallyReverse = () => {
-    dispatch(changeMatrixState(horizontallyReverseMatrix(matrix)));
+    dispatch(changeMatrixState(actions.horizontallyReverseMatrix(matrix)));
   }
   const verticallyReverse = () => {
-    dispatch(changeMatrixState(verticallyReverseMatrix(matrix)));
+    dispatch(changeMatrixState(actions.verticallyReverseMatrix(matrix)));
   }
   const transposeClockwise = () => {
-    dispatch(changeMatrixState(transposeMatrixClockwise(matrix)));
+    if (rows !== columns) {
+      alert('number of rows and columns have to match');
+    } else {
+      dispatch(changeMatrixState(actions.transposeMatrixClockwise(matrix)));
+    }
   }
   const transposeCounterClockwise = () => {
-    dispatch(changeMatrixState(transposeMatrixCounterClockwise(matrix)));
+    if (rows !== columns) {
+      alert('number of rows and columns have to match');
+    } else {
+      dispatch(changeMatrixState(actions.transposeMatrixCounterClockwise(matrix)));
+    }
   }
 
 	return (
-		<div>
-			<Button content='refactor' onClick={refactor} />
-			<Button content='triangularize' onClick={triangularize} />
-			<Button content='refactor' onClick={refactor} />
-			<Button content='reverse horizontally' onClick={horizontallyReverse} />
-			<Button content='reverse vertically' onClick={verticallyReverse} />
-			<Button content='transpose counterclockwise' onClick={transposeCounterClockwise} />
-			<Button content='transpose clockwise' onClick={transposeClockwise} />
-		</div>
+    <div className='actions-container'>
+      <Button content='refactor' onClick={refactor} variant='light-blue' />
+      <Button content='triangularize' onClick={triangularize} variant='green' />
+      <Button content='reverse horizontally' onClick={horizontallyReverse} variant='light-grey' />
+      <Button content='reverse vertically' onClick={verticallyReverse} variant='warm-yellow' />
+      <Button content='transpose counterclockwise' onClick={transposeCounterClockwise} variant='dark-green' />
+      <Button content='transpose clockwise' onClick={transposeClockwise} variant='dark-grey' />
+    </div>
 	)
 }
 

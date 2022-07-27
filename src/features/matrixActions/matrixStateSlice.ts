@@ -34,7 +34,7 @@ const matrixStateSlice = createSlice({
       state.initial.columns = action.payload
     },
     toggleTriangular(state) {
-      state.isTriangular === true ? false : true;
+      state.isTriangular = !state.isTriangular
     }
   }
 });
