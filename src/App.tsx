@@ -2,6 +2,7 @@ import "./App.css";
 import Matrix from "./components/Matrix";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
 import { createInitialMatrix, changeTriangularMatrixState, setInitialRows, setInitialColumns, toggleTriangular, makeFirstTriangular } from "./features/matrixActions/matrixStateSlice";
+import { setShowData } from "./features/closestNumber/closestNumberSlice";
 
 import { createMatrix } from "./utils/matrixUtils";
 
@@ -22,6 +23,7 @@ export default function App() {
     dispatch(changeTriangularMatrixState([]));
     dispatch(makeFirstTriangular(false));
     if (isTriangular) dispatch(toggleTriangular());
+    dispatch(setShowData(false));
   }
 
   return (
