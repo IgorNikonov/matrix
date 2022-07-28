@@ -20,7 +20,7 @@ const MatrixActions = () => {
     dispatch(changeMatrixState(utils.sortMatrix(matrix)));
     dispatch(changeTriangularMatrixState(utils.sortMatrix(triangularMatrix)));
   }
-  const triangularize = () => {
+  const triangularize1 = () => {
     if (rows !== columns) {
       alert('number of rows and columns have to match');
     } else {
@@ -56,7 +56,7 @@ const MatrixActions = () => {
     }
   }
 
-  const weirdlyTriangularize = () => {
+  const triangularize2 = () => {
     dispatch(toggleTriangular());
     dispatch(changeMatrixState(triangularMatrix));
     matrix = triangularMatrix;
@@ -75,13 +75,13 @@ const MatrixActions = () => {
         variant='light-cyan'
       />
       <Button 
-        content='triangularize' 
-        onClick={triangularize} 
+        content='triangularize 1' 
+        onClick={triangularize1} 
         variant='green'
       />
       <Button 
-        content='triangularize weirdly' 
-        onClick={weirdlyTriangularize} 
+        content='triangularize 2' 
+        onClick={triangularize2} 
         variant='light-blue'
       />
       <Button 
