@@ -9,35 +9,38 @@ interface IClosestNumberData {
 }
 
 interface IClosestNumberState {
-	initialNumber: number;
-	row: number;
-	column: number;
-	closestNumber: number;
-	deviation: number;
+	data: IClosestNumberData;
+	showData: boolean;
 }
 
 const initialState: IClosestNumberState = {
-	initialNumber: 0,
-	row: 0,
-	column: 0,
-	closestNumber: 9999,
-	deviation: 0,
+	data: {
+		initialNumber: 0,
+		row: 0,
+		column: 0,
+		closestNumber: 9999,
+		deviation: 0,
+	},
+	showData: false
 }
 
 const closestNumberSlice = createSlice({
 	name: 'closestNumberState',
 	initialState,
 	reducers: {
-		setClosestNumber(state, action) {
-			state.closestNumber = action.payload.closestNumber;
-			state.initialNumber = action.payload.initialNumber;
-			state.row = action.payload.row;
-			state.column = action.payload.column;
-			state.closestNumber = action.payload.closestNumber;
-			state.deviation = action.payload.deviation;
+		setClosestNumber(state, action: PayloadAction<IClosestNumberData>) {
+			state.data.closestNumber = action.payload.closestNumber;
+			state.data.initialNumber = action.payload.initialNumber;
+			state.data.row = action.payload.row;
+			state.data.column = action.payload.column;
+			state.data.closestNumber = action.payload.closestNumber;
+			state.data.deviation = action.payload.deviation;
+		},
+		setShowData(state, action) {
+			state.showData = action.payload;
 		}
-	},
+	}
 });
 
-export const { setClosestNumber } = closestNumberSlice.actions;
+export const { setClosestNumber, setShowData } = closestNumberSlice.actions;
 export default closestNumberSlice.reducer;

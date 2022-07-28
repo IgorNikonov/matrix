@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { setClosestNumber } from '../../features/closestNumber/closestNumberSlice';
-import { findClosestNumber } from '../../utils/matrixUtils'
+import { setClosestNumber, setShowData } from '../../features/closestNumber/closestNumberSlice';
+import { findClosestNumber } from '../../utils/matrixUtils';
+import Button from '../Button';
 
 interface IClosestNumberProps {
 	matrix: number[][];
@@ -9,22 +10,23 @@ interface IClosestNumberProps {
 
 const ClosestNumber: React.FC<IClosestNumberProps> = ({matrix}) => {
 	const [userInput, setUserInput] = useState(0);
-	const [clicked, setClicked] = useState(false);
+	// const [clicked, setClicked] = useState(false);
 
-	const {initialNumber, row, column, closestNumber, deviation} = useAppSelector(state => state.closestNumber);
+	const {initialNumber, row, column, closestNumber, deviation} = useAppSelector(state => state.closestNumber.data);
+	const showData = useAppSelector(state => state.closestNumber.showData);
 	const dispatch = useAppDispatch();
 
-	const clickHandler = () => {
+	const handleShowData = () => {
 		dispatch(setClosestNumber(findClosestNumber(matrix, userInput)));
-		setClicked(true);
+		dispatch(setShowData(true));
 	}
 
 	return (
 		<div>
 			<input type="number" onChange={(e) => setUserInput(parseInt(e.target.value))} />
-			<button onClick={clickHandler}>find closest number</button>
+			<Button content='find closest number' variant='pale-red' onClick={handleShowData} />
 			<br />
-			{clicked &&
+			{showData &&
 				<div>
 					<p>initial number: {initialNumber}</p>
 					<p>row: {row}</p>
