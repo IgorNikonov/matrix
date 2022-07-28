@@ -2,8 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IClosestNumberData {
 	initialNumber: number;
-	row: number;
-	column: number;
+	row: number | null;
+	column: number | null;
 	closestNumber: number;
 	deviation: number;
 }
@@ -16,12 +16,12 @@ interface IClosestNumberState {
 const initialState: IClosestNumberState = {
 	data: {
 		initialNumber: 0,
-		row: 0,
-		column: 0,
+		row: null,
+		column: null,
 		closestNumber: 9999,
 		deviation: 0,
 	},
-	showData: false	
+	showData: false
 }
 
 const closestNumberSlice = createSlice({
@@ -36,11 +36,20 @@ const closestNumberSlice = createSlice({
 			state.data.closestNumber = action.payload.closestNumber;
 			state.data.deviation = action.payload.deviation;
 		},
+		resetClosestNumber(state) {
+			state.data = {
+				initialNumber: 0,
+				row: null,
+				column: null,
+				closestNumber: 9999,
+				deviation: 0,
+			}
+		},
 		setShowData(state, action: PayloadAction<boolean>) {
 			state.showData = action.payload;
 		}
 	}
 });
 
-export const { setClosestNumber, setShowData } = closestNumberSlice.actions;
+export const { setClosestNumber, setShowData, resetClosestNumber } = closestNumberSlice.actions;
 export default closestNumberSlice.reducer;

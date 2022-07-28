@@ -4,3 +4,7 @@
   width: 100%;
   margin: 3px;
 }
+
+.highlighted {
+  background-color: rgb(117, 158, 206);
+}

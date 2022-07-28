@@ -7,15 +7,13 @@ interface IMatrixProps {
 }
 
 const Matrix: React.FC<IMatrixProps> = ({ matrix }) => {
-  // const uuid = uuid();
-
   return (
     <div className="wrapper">
       <div className="matrix-container">
-        {matrix.map((el) => (
+        {matrix.map((el, rowIdx) => (
           <div className="row" key={nanoid()}>
-            {el.map((matrixEl) => (
-              <MatrixElement content={matrixEl} key={nanoid()} />
+            {el.map((matrixEl, colIdx) => (
+              <MatrixElement content={matrixEl} row={rowIdx} col={colIdx} key={nanoid()} />
             ))}
           </div>
         ))}
