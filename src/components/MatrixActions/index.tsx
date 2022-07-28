@@ -7,15 +7,19 @@ import { changeMatrixState, makeFirstTriangular, makeTriangular, toggleTriangula
 
 const MatrixActions = () => {
   const { matrixState, triangularMatrix, firstTriangular } = useAppSelector(state => state.matrixState);
-  const matrix = matrixState;
+  let matrix = matrixState;
 
-	const {rows, columns} = useAppSelector(state => state.matrixState.initial);
+	const { rows, columns } = useAppSelector(state => state.matrixState.initial);
 	const dispatch = useAppDispatch();
 
 	const refactor = () => {
     dispatch(changeMatrixState(utils.refactorMatrix(matrix)));
     dispatch(changeTriangularMatrixState(utils.refactorMatrix(triangularMatrix)));
   };
+  const sort = () => {
+    dispatch(changeMatrixState(utils.sortMatrix(matrix)));
+    dispatch(changeTriangularMatrixState(utils.sortMatrix(triangularMatrix)));
+  }
   const triangularize = () => {
     if (rows !== columns) {
       alert('number of rows and columns have to match');
@@ -26,7 +30,7 @@ const MatrixActions = () => {
       }
       dispatch(toggleTriangular());
     }
-  };
+  }
   const horizontallyReverse = () => {
     dispatch(changeMatrixState(utils.horizontallyReverseMatrix(matrix)));
     dispatch(changeTriangularMatrixState(utils.horizontallyReverseMatrix(triangularMatrix)));
@@ -52,14 +56,54 @@ const MatrixActions = () => {
     }
   }
 
+  const weirdlyTriangularize = () => {
+    dispatch(toggleTriangular());
+    dispatch(changeMatrixState(triangularMatrix));
+    matrix = triangularMatrix;
+  }
+
 	return (
-    <div className='utils-container'>
-      <Button content='refactor' onClick={refactor} variant='light-blue' />
-      <Button content='triangularize' onClick={triangularize} variant='green' />
-      <Button content='reverse horizontally' onClick={horizontallyReverse} variant='light-grey' />
-      <Button content='reverse vertically' onClick={verticallyReverse} variant='warm-yellow' />
-      <Button content='transpose counterclockwise' onClick={transposeCounterClockwise} variant='dark-green' />
-      <Button content='transpose clockwise' onClick={transposeClockwise} variant='dark-grey' />
+    <div className='actions-container'>
+      <Button 
+        content='refactor' 
+        onClick={refactor} 
+        variant='light-blue'
+      />
+      <Button 
+        content='sort' 
+        onClick={sort} 
+        variant='light-cyan'
+      />
+      <Button 
+        content='triangularize' 
+        onClick={triangularize} 
+        variant='green'
+      />
+      <Button 
+        content='triangularize weirdly' 
+        onClick={weirdlyTriangularize} 
+        variant='light-blue'
+      />
+      <Button 
+        content='reverse horizontally' 
+        onClick={horizontallyReverse} 
+        variant='light-grey'
+      />
+      <Button 
+        content='reverse vertically' 
+        onClick={verticallyReverse} 
+        variant='warm-yellow'
+      />
+      <Button 
+        content='transpose counterclockwise' 
+        onClick={transposeCounterClockwise} 
+        variant='dark-green'
+      />
+      <Button 
+        content='transpose clockwise' 
+        onClick={transposeClockwise} 
+        variant='dark-grey'
+      />
     </div>
 	)
 }

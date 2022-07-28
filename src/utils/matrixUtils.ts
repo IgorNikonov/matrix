@@ -10,9 +10,9 @@ export const createMatrix = (nRows?: number, nElements?: number) => {
   return matrix;
 };
 
-export const refactorMatrix = (matrix: number[][]) => {
-  return matrix[0].map((el, idx) => matrix.map((el: any) => el[idx]));
-};
+export const refactorMatrix = (matrix: number[][]) => matrix.map((el, idx) => matrix.map((el: any) => el[idx]));
+
+export const sortMatrix = (matrix: number[][]) => matrix.map(rowEl => Array.from(rowEl).sort()).sort((a, b) => a[0] - b[0])
 
 export const triangularizeMatrix = (matrix: number[][]) => {
   return matrix.map((row, idx) => {
