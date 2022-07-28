@@ -57,10 +57,15 @@ const MatrixActions = () => {
   }
 
   const triangularize2 = () => {
-    dispatch(toggleTriangular());
-    dispatch(makeTriangular(utils.triangularizeMatrix(matrix)));
-    // dispatch(changeMatrixState(triangularMatrix));
-    matrix = triangularMatrix;
+    if (rows !== columns) {
+      alert('number of rows and columns have to match');
+    } else {
+      dispatch(toggleTriangular());
+      dispatch(makeTriangular(utils.triangularizeMatrix(matrix)));
+      // dispatch(changeMatrixState(triangularMatrix));
+      // matrix = triangularMatrix;
+    }
+    
   }
 
 	return (
