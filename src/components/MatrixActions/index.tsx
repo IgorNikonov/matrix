@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '../Button';
 import './style.css';
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import * as actions from "../../utils/matrixUtils";
+import * as utils from "../../utils/matrixUtils";
 import { changeMatrixState, makeTriangular, toggleTriangular } from "../../features/matrixActions/matrixStateSlice";
 
 const MatrixActions = () => {
@@ -13,13 +13,13 @@ const MatrixActions = () => {
 
   let matrix = matrixState;
 
-	const refactor = () => dispatch(changeMatrixState(actions.refactorMatrix(matrix)));
+	const refactor = () => dispatch(changeMatrixState(utils.refactorMatrix(matrix)));
 
-  const sort = () => dispatch(changeMatrixState(actions.sortMatrix(matrix)));
+  const sort = () => dispatch(changeMatrixState(utils.sortMatrix(matrix)));
   
-  const horizontallyReverse = () => dispatch(changeMatrixState(actions.horizontallyReverseMatrix(matrix)));
+  const horizontallyReverse = () => dispatch(changeMatrixState(utils.horizontallyReverseMatrix(matrix)));
 
-  const verticallyReverse = () => dispatch(changeMatrixState(actions.verticallyReverseMatrix(matrix)));
+  const verticallyReverse = () => dispatch(changeMatrixState(utils.verticallyReverseMatrix(matrix)));
 
   const triangularize = () => {
     if (rows !== columns) {
@@ -27,7 +27,7 @@ const MatrixActions = () => {
       return;
     }
 
-    dispatch(makeTriangular(actions.triangularizeMatrix(matrix)));
+    dispatch(makeTriangular(utils.triangularizeMatrix(matrix)));
     dispatch(toggleTriangular());
   };
 
@@ -35,7 +35,7 @@ const MatrixActions = () => {
     if (rows !== columns) {
       alert('number of rows and columns have to match');
     } else {
-      dispatch(changeMatrixState(actions.transposeMatrixClockwise(matrix)));
+      dispatch(changeMatrixState(utils.transposeMatrixClockwise(matrix)));
     }
   }
 
@@ -43,7 +43,7 @@ const MatrixActions = () => {
     if (rows !== columns) {
       alert('number of rows and columns have to match');
     } else {
-      dispatch(changeMatrixState(actions.transposeMatrixCounterClockwise(matrix)));
+      dispatch(changeMatrixState(utils.transposeMatrixCounterClockwise(matrix)));
     }
   }
 
