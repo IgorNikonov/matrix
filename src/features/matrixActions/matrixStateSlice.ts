@@ -44,8 +44,8 @@ const matrixStateSlice = createSlice({
     toggleTriangular(state) {
       state.isTriangular = !state.isTriangular
     },
-    makeFirstTriangular(state) {
-      state.firstTriangular = true;
+    makeFirstTriangular(state, action: PayloadAction<boolean>) {
+      state.firstTriangular = action.payload;
     }
   }
 });

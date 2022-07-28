@@ -6,9 +6,9 @@ import * as utils from "../../utils/matrixUtils";
 import { changeMatrixState, makeFirstTriangular, makeTriangular, toggleTriangular, changeTriangularMatrixState } from "../../features/matrixActions/matrixStateSlice";
 
 const MatrixActions = () => {
-  const matrix = useAppSelector(state => state.matrixState.matrixState);
-  const triangularMatrix = useAppSelector(state => state.matrixState.triangularMatrix);
-  const firstTriangular = useAppSelector(state => state.matrixState.firstTriangular);
+  const { matrixState, triangularMatrix, firstTriangular } = useAppSelector(state => state.matrixState);
+  const matrix = matrixState;
+
 	const {rows, columns} = useAppSelector(state => state.matrixState.initial);
 	const dispatch = useAppDispatch();
 
@@ -22,7 +22,7 @@ const MatrixActions = () => {
     } else {
       if (!firstTriangular) {
         dispatch(makeTriangular(utils.triangularizeMatrix(matrix)));
-        dispatch(makeFirstTriangular());
+        dispatch(makeFirstTriangular(true));
       }
       dispatch(toggleTriangular());
     }

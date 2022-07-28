@@ -1,7 +1,7 @@
 import "./App.css";
 import Matrix from "./components/Matrix";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
-import { createInitialMatrix, changeMatrixState, setInitialRows, setInitialColumns } from "./features/matrixActions/matrixStateSlice";
+import { createInitialMatrix, changeTriangularMatrixState, setInitialRows, setInitialColumns, toggleTriangular, makeFirstTriangular } from "./features/matrixActions/matrixStateSlice";
 
 import { createMatrix } from "./utils/matrixUtils";
 
@@ -10,9 +10,8 @@ import MatrixActions from "./components/MatrixActions";
 
 export default function App() {
   // redux state values
-  const matrix = useAppSelector((state) => state.matrixState.matrixState);
-  const triangularMatrix = useAppSelector(state => state.matrixState.triangularMatrix);
-  const isTriangular = useAppSelector(state => state.matrixState.isTriangular);
+  const {matrixState, triangularMatrix, isTriangular} = useAppSelector(state => state.matrixState);
+  const matrix = matrixState;
   const {rows, columns} = useAppSelector(state => state.matrixState.initial);
 
   const dispatch = useAppDispatch();
@@ -20,6 +19,9 @@ export default function App() {
   // create initial matrix
   const create = () => {
     dispatch(createInitialMatrix(createMatrix(rows, columns)));
+    dispatch(changeTriangularMatrixState([]));
+    dispatch(makeFirstTriangular(false));
+    if (isTriangular) dispatch(toggleTriangular());
   }
 
   return (
@@ -39,7 +41,7 @@ export default function App() {
       {!isTriangular && <Matrix matrix={matrix} />}
       {isTriangular && <Matrix matrix={triangularMatrix} />}
 
-      {matrix.length && 
+      {!!matrix.length && 
         <>
           <MatrixActions />
           <ClosestNumber matrix={matrix} />
