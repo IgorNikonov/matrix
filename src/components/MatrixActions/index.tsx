@@ -58,7 +58,8 @@ const MatrixActions = () => {
 
   const triangularize2 = () => {
     dispatch(toggleTriangular());
-    dispatch(changeMatrixState(triangularMatrix));
+    dispatch(makeTriangular(utils.triangularizeMatrix(matrix)));
+    // dispatch(changeMatrixState(triangularMatrix));
     matrix = triangularMatrix;
   }
 
