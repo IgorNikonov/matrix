@@ -18,6 +18,7 @@ import { createMatrix } from "./utils/matrixUtils";
 import ClosestNumber from "./components/ClosestNumber";
 import MatrixActions from "./components/MatrixActions";
 import Button from "./components/Button";
+import { useRef } from "react";
 
 export default function App() {
 	// redux state values
@@ -28,6 +29,9 @@ export default function App() {
 	const { rows, columns } = useAppSelector(
 		(state) => state.matrixState.initial
 	);
+
+	const inputEl1 = useRef<HTMLInputElement>(null);
+	const inputEl2 = useRef<HTMLInputElement>(null);
 
 	const dispatch = useAppDispatch();
 
@@ -41,6 +45,8 @@ export default function App() {
 		if (isTriangular) dispatch(toggleTriangular());
 		dispatch(setShowData(false));
 		dispatch(resetClosestNumber());
+		inputEl1.current && (inputEl1.current.value = "");
+		inputEl2.current && (inputEl2.current.value = "");
 	};
 
 	return (
@@ -50,6 +56,7 @@ export default function App() {
 					<div>
 						<span className='font-[500] mr-2'>rows:</span>
 						<input
+							ref={inputEl1}
 							className='border border-black outline-none'
 							type='number'
 							onChange={(e) =>
@@ -60,6 +67,7 @@ export default function App() {
 					<div>
 						<span className='font-[500] mr-2'>columns:</span>
 						<input
+							ref={inputEl2}
 							className='border border-black outline-none'
 							type='number'
 							onChange={(e) =>

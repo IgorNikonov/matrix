@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
 	setClosestNumber,
@@ -16,18 +16,23 @@ const ClosestNumber: React.FC<IClosestNumberProps> = ({ matrix }) => {
 
 	const { initialNumber, row, column, closestNumber, deviation } =
 		useAppSelector((state) => state.closestNumber.data);
+
 	const showData = useAppSelector((state) => state.closestNumber.showData);
 	const dispatch = useAppDispatch();
+
+	const inputEl = useRef<HTMLInputElement>(null);
 
 	const handleShowData = () => {
 		dispatch(setClosestNumber(findClosestNumber(matrix, userInput)));
 		dispatch(setShowData(true));
+		inputEl.current && (inputEl.current.value = "");
 	};
 
 	return (
 		<div className='mt-5'>
 			<span className='font-[500] mr-2'>your number:</span>
 			<input
+				ref={inputEl}
 				className='border border-black outline-none'
 				type='number'
 				onChange={(e) => setUserInput(parseInt(e.target.value))}
