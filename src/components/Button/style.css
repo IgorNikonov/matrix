@@ -1,9 +1,4 @@
-button {
-	padding: 15px;
-	border: none;
-	margin: 5px;
-}
-
+/* color variants */
 .light-blue {
 	background-color: #3daad6;
 }
