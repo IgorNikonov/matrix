@@ -44,23 +44,31 @@ export default function App() {
 	};
 
 	return (
-		<div className='m-5 select-none'>
+		<div className='m-5 select-none text-center'>
 			<div className='create-matrix'>
-				<div className='flex gap-3 justify-center'>
-					<input
-						className='border border-black'
-						type='number'
-						onChange={(e) => dispatch(setInitialRows(parseInt(e.target.value)))}
-					/>
-					<input
-						className='border border-black'
-						type='number'
-						onChange={(e) =>
-							dispatch(setInitialColumns(parseInt(e.target.value)))
-						}
-					/>
+				<div className='flex gap-5 justify-center'>
+					<div>
+						<span className='font-[500] mr-2'>rows:</span>
+						<input
+							className='border border-black outline-none'
+							type='number'
+							onChange={(e) =>
+								dispatch(setInitialRows(parseInt(e.target.value)))
+							}
+						/>
+					</div>
+					<div>
+						<span className='font-[500] mr-2'>columns:</span>
+						<input
+							className='border border-black outline-none'
+							type='number'
+							onChange={(e) =>
+								dispatch(setInitialColumns(parseInt(e.target.value)))
+							}
+						/>
+					</div>
 				</div>
-				<div className='inline-block ml-[50%] translate-x-[-50%] w-auto'>
+				<div className='inline-block w-auto mt-4'>
 					<Button variant='green' onClick={create} content='create matrix' />
 				</div>
 			</div>

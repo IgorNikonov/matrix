@@ -82,7 +82,7 @@ const MatrixActions = () => {
 	};
 
 	return (
-		<div className='flex justify-center flex-wrap'>
+		<div className='flex justify-center flex-wrap mt-5'>
 			<Button content='refactor' onClick={refactor} variant='light-blue' />
 			<Button content='triangularize' onClick={triangularize} variant='green' />
 			<Button
